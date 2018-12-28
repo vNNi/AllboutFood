@@ -31,7 +31,7 @@ export default {
     },
     content: {
         minHeight: "100vh",
-        width: "30%",
+        width: "25%",
         disply: "flex",
         float: "left",
         backgroundColor: "white",
@@ -49,5 +49,21 @@ export default {
         top: "0px",
         right: "10px",
         cursor: "pointer",
+        padding: "10px",
+    },
+    icon: {
+        height: "30px",
+    },
+    menuLinks: {
+        margin: "4em 15%",
+    },
+    linkContent: {
+        display: "flex",
+        alignItems: "center",
+        marginBottom: "2em",
+    },
+    textLink: {
+        paddingLeft: "1em",
+        fontFamily: 'Roboto',
     },
 }

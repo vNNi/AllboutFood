@@ -20,5 +20,8 @@ export default {
         textAlign: "center",
         fontFamily: 'Roboto',
 
+    },
+    header: {
+        position: "relative",
     }
 }

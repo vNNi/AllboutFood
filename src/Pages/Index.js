@@ -6,7 +6,7 @@ class Index extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
+        <header className="App-header" style={st.header}>
           <Nav />
         </header>
         <section style={st.main} id="NewRecipe">
@@ -16,7 +16,6 @@ class Index extends Component {
             <FormRecipe />
           </div>
         </section>
-
       </div>
     );
   }

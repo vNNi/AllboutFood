@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Nav from '../Components/Nav/Nav';
+import Nav from '../../Components/Nav/Nav';
 import st from './style';
-import FormRecipe from '../Components/FormRecipe/index';
+import FormRecipe from '../../Components/FormRecipe/index';
 class Index extends Component {
   render() {
     return (

@@ -42,6 +42,7 @@ export default {
         borderRadius: "24px",
         color: "white",
         lineHeight: "20px",
-        fontSize: "1.2em"
+        fontSize: "1.2em",
+        cursor: "pointer",
     }
 }

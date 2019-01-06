@@ -7,7 +7,6 @@ export default class index extends Component {
         dots: "...",
     }
     loadingDots = (e) => {
-        let x = 0;
         setInterval(() => {
         }, 500);
     }

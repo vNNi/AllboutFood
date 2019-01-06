@@ -42,9 +42,7 @@ export default withRouter(class index extends Component {
                 }
             }).catch((error) => {
                 console.log(error);
-                this.setState({
-                    badResponse: true,
-                });
+                this.props.history.push("/500");
             });
     }
     handleTitle = (e) => {

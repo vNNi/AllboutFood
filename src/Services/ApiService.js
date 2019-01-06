@@ -1,20 +1,18 @@
-class ApiService {
+export default class ApiService {
     constructor() {
-        this.applicationKey = "8f59ea5bfa153e2a2099064a3465ba8a";
-        this.applicationID = "33c387e3";
-        this.url = "https://api.edamam.com/api/nutrition-details";
+        this.url = `https://api.edamam.com/api/nutrition-details?app_id=33c387e3&app_key=8f59ea5bfa153e2a2099064a3465ba8a`;
     }
     newRecipe(data) {
-        const header = {
+        console.log(data);
+        const request = {
             method: 'POST',
             headers: {
-                'Content-type': 'application/json',
+                'Content-Type': 'application/json',
             },
-            mode: 'cors',
             body: JSON.stringify(data),
         };
         return new Promise((resolve, reject) => {
-            fetch(this.url, header)
+            fetch(this.url, request)
                 .then((response) => {
                     resolve(response);
                 }).catch((error) => {

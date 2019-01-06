@@ -1,14 +1,66 @@
 import React, { Component } from 'react'
 import st from './style';
 import RecipeLoading from '../Loadings/RecipeLoading/index';
-export default class index extends Component {
+import ApiService from '../../Services/ApiService';
+import { withRouter } from 'react-router-dom';
+export default withRouter(class index extends Component {
+    constructor(props) {
+        super(props);
+        this.apiservice = new ApiService();
+    }
     state = {
         loadingRequest: false,
+        titleRecipe: "",
+        ingr: [],
+        yield: "",
+        badResponse: false,
     }
     newRecipe = (e) => {
         e.preventDefault();
         this.setState({
             loadingRequest: true,
+        });
+        const recipe = {
+            "title": this.state.titleRecipe,
+            "ingr": this.state.ingr,
+            "yield": this.state.yield,
+        };
+        this.apiservice.newRecipe(recipe)
+            .then((response) => {
+                this.setState({
+                    loadingRequest: false
+                });
+                if (response.ok && response.status === 200) {
+                    response.json().then((data) => {
+                        return (
+                            this.props.history.push("/result", { result: data })
+                        )
+                    });
+
+                } else if (response.status === 500) {
+                    throw new Error("server error 500");
+                }
+            }).catch((error) => {
+                console.log(error);
+                this.setState({
+                    badResponse: true,
+                });
+            });
+    }
+    handleTitle = (e) => {
+        this.setState({
+            titleRecipe: e.target.value
+        });
+    }
+    handleIngr = (e) => {
+        let newIngr = e.target.value.split(",");
+        this.setState({
+            ingr: [...newIngr]
+        });
+    }
+    handleYield = (e) => {
+        this.setState({
+            yield: e.target.value.toString()
         });
     }
     render() {
@@ -16,16 +68,16 @@ export default class index extends Component {
             <div>
                 <form>
                     <div style={st.formGroup}>
-                        <label style={st.label}>Título </label>
-                        <input style={st.input} type="text"></input>
+                        <label style={st.label} >Título </label>
+                        <input style={st.input} type="text" onChange={this.handleTitle}></input>
                     </div>
                     <div style={st.formGroup}>
                         <label style={st.label}>Quantidade de Pessoas </label>
-                        <input style={st.input} type="number"></input>
+                        <input style={st.input} type="number" onChange={this.handleYield}></input>
                     </div>
                     <div style={st.formGroup}>
                         <label style={st.label}>Ingredientes </label>
-                        <textarea style={st.textArea} placeholder="1 banana, 2 apples, 1 fish"></textarea>
+                        <textarea style={st.textArea} placeholder="1 banana, 2 apples, 1 fish" onChange={this.handleIngr}></textarea>
                     </div>
                     <div style={st.buttonContainer}>
                         <button style={st.button} type="submit" onClick={this.newRecipe}>Calcular</button>
@@ -37,4 +89,4 @@ export default class index extends Component {
             </div>
         )
     }
-}
+})

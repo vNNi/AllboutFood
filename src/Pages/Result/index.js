@@ -2,16 +2,14 @@ import React, { Component } from 'react'
 import Nav from '../../Components/Nav/Nav';
 import { withRouter } from 'react-router-dom';
 import st from './style.js';
-export default withRouter(class index extends Component {
+import { connect } from 'react-redux';
+
+const mapStateToProps = state => ({
+    result: [].concat(state.postRecipe.result)
+});
+export default withRouter(connect(mapStateToProps)(class index extends Component {
     state = {
         result: [],
-    }
-    componentWillMount = () => {
-        console.log(this.props.location.state.result);
-        this.setState({
-            result: this.state.result.concat(this.props.location.state.result),
-        });
-        console.log(this.state.result);
     }
     render() {
 
@@ -21,7 +19,7 @@ export default withRouter(class index extends Component {
                 <h1 style={st.title}>Result</h1>
                 <div style={st.container}>
                     {
-                        this.state.result.map((result, index) => {
+                        this.props.result.map((result, index) => {
                             return (
                                 <div key={index}>
                                     <div style={st.content}><span style={st.label}>Calories: </span>{result.calories}</div>
@@ -38,4 +36,4 @@ export default withRouter(class index extends Component {
             </div>
         )
     }
-});
+}));

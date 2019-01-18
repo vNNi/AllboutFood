@@ -3,7 +3,7 @@ import st from './style';
 import RecipeLoading from '../Loadings/RecipeLoading/index';
 import ApiService from '../../Services/ApiService';
 import { withRouter } from 'react-router-dom';
-export default withRouter(class index extends Component {
+export default class index extends Component {
     constructor(props) {
         super(props);
         this.apiservice = new ApiService();
@@ -25,25 +25,7 @@ export default withRouter(class index extends Component {
             "ingr": this.state.ingr,
             "yield": this.state.yield,
         };
-        this.apiservice.newRecipe(recipe)
-            .then((response) => {
-                this.setState({
-                    loadingRequest: false
-                });
-                if (response.ok && response.status === 200) {
-                    response.json().then((data) => {
-                        return (
-                            this.props.history.push("/result", { result: data })
-                        )
-                    });
-
-                } else if (response.status === 500) {
-                    throw new Error("server error 500");
-                }
-            }).catch((error) => {
-                console.log(error);
-                this.props.history.push("/500");
-            });
+        this.apiservice.newRecipe(recipe);
     }
     handleTitle = (e) => {
         this.setState({
@@ -87,4 +69,4 @@ export default withRouter(class index extends Component {
             </div>
         )
     }
-})
+}

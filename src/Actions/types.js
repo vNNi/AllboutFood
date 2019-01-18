@@ -1,0 +1,1 @@
+export const POST_RECIPE = 'POST_RECIPE';
